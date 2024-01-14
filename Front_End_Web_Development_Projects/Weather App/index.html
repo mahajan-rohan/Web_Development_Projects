@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Weather App</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Major Cities
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="getWeather('Delhi')">Delhi</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="getWeather('Mumbai')">Mumbai</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="getWeather('Pune')">Pune</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="getWeather('Bangalore')">Bangalore</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://api-ninjas.com/api/weather" target="_blank">API</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input id="city" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit" id="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main>
+            <h1 class="my-4 text-center"> Weather for <span id="cityName"></span></h1>
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                        <div class="card-header py-3 text-bg-primary">
+                            <h4 class="my-0 fw-normal">Temperature</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title"><span id="temp"></span>&deg;C</h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Max Temp : <span id="max_temp"></span>&deg;C</li>
+                                <li>Min Temp : <span id="min_temp"></span>&deg;C</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                        <div class="card-header py-3 text-bg-primary">
+                            <h4 class="my-0 fw-normal">Humidity Info</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title"><span id="humidity"></span> %</h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Cloud PCT : <span id="cloud_pct"></span>%</li>
+                                <li>Feels Like : <span id="feels_like"></span>&deg;C</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                        <div class="card-header py-3 text-bg-primary">
+                            <h4 class="my-0 fw-normal">Wind Info</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title"><span id="wind_speed"></span> km/hr</h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Sunrise Time : <span id="sunrise"></span></li>
+                                <li>Sunset Time : <span id="sunset"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="display-6 text-center mb-4">Weather of some Major Cities</h2>
+
+            <div class="table-responsive">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th style="width: auto;"></th>
+                            <th style="width: auto;">Cloud Pct</th>
+                            <th style="width: auto;">Feels like</th>
+                            <th style="width: auto;">Humidity</th>
+                            <th style="width: auto;">Max Temp</th>
+                            <th style="width: auto;">Min Temp</th>
+                            <th style="width: auto;">Sunrise</th>
+                            <th style="width: auto;">Sunset</th>
+                            <th style="width: auto;">Temp</th>
+                            <th style="width: auto;">Wind degrees</th>
+                            <th style="width: auto;">Wind speed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="text-start">Delhi</th>
+                            <td><span id="cloudD"></span>%</td>
+                            <td><span id="feelsD"></span>&deg;C</td>
+                            <td><span id="humD"></span>%</td>
+                            <td><span id="maxTD"></span>&deg;C</td>
+                            <td><span id="minTD"></span>&deg;C</td>
+                            <td><span id="sunRD"></span></td>
+                            <td><span id="sunSD"></span></td>
+                            <td><span id="tempD"></span>&deg;C</td>
+                            <td><span id="windDD"></span></td>
+                            <td><span id="windSD"></span> km/hr</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Mumbai</th>
+                            <td><span id="cloudM"></span>%</td>
+                            <td><span id="feelsM"></span>&deg;C</td>
+                            <td><span id="humM"></span>%</td>
+                            <td><span id="maxTM"></span>&deg;C</td>
+                            <td><span id="minTM"></span>&deg;C</td>
+                            <td><span id="sunRM"></span></td>
+                            <td><span id="sunSM"></span></td>
+                            <td><span id="tempM"></span>&deg;C</td>
+                            <td><span id="windDM"></span></td>
+                            <td><span id="windSM"></span> km/hr</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Pune</th>
+                            <td><span id="cloudP"></span>%</td>
+                            <td><span id="feelsP"></span>&deg;C</td>
+                            <td><span id="humP"></span>%</td>
+                            <td><span id="maxTP"></span>&deg;C</td>
+                            <td><span id="minTP"></span>&deg;C</td>
+                            <td><span id="sunRP"></span></td>
+                            <td><span id="sunSP"></span></td>
+                            <td><span id="tempP"></span>&deg;C</td>
+                            <td><span id="windDP"></span></td>
+                            <td><span id="windSP"></span> km/hr</td>
+                        </tr>
+                    </tbody>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="text-start">Nashik</th>
+                            <td><span id="cloudN"></span>%</td>
+                            <td><span id="feelsN"></span>&deg;C</td>
+                            <td><span id="humN"></span>%</td>
+                            <td><span id="maxTN"></span>&deg;C</td>
+                            <td><span id="minTN"></span>&deg;C</td>
+                            <td><span id="sunRN"></span></td>
+                            <td><span id="sunSN"></span></td>
+                            <td><span id="tempN"></span>&deg;C</td>
+                            <td><span id="windDN"></span></td>
+                            <td><span id="windSN"></span> km/hr</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Kolhapur</th>
+                            <td><span id="cloudK"></span>%</td>
+                            <td><span id="feelsK"></span>&deg;C</td>
+                            <td><span id="humK"></span>%</td>
+                            <td><span id="maxTK"></span>&deg;C</td>
+                            <td><span id="minTK"></span>&deg;C</td>
+                            <td><span id="sunRK"></span></td>
+                            <td><span id="sunSK"></span></td>
+                            <td><span id="tempK"></span>&deg;C</td>
+                            <td><span id="windDK"></span></td>
+                            <td><span id="windSK"></span> km/hr</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Gadhinglaj</th>
+                            <td><span id="cloudG"></span>%</td>
+                            <td><span id="feelsG"></span>&deg;C</td>
+                            <td><span id="humG"></span>%</td>
+                            <td><span id="maxTG"></span>&deg;C</td>
+                            <td><span id="minTG"></span>&deg;C</td>
+                            <td><span id="sunRG"></span></td>
+                            <td><span id="sunSG"></span></td>
+                            <td><span id="tempG"></span>&deg;C</td>
+                            <td><span id="windDG"></span></td>
+                            <td><span id="windSG"></span> km/hr</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <div class="container">
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-2 text-muted" href="https://api-ninjas.com/api/weather" target="_blank">API</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+            </ul>
+            <p class="text-center text-muted">© 2024 Rohan Mahajan</p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
